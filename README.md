@@ -15,10 +15,10 @@ The system provides real-time notifications to church members using Servlets, We
 ## Features (In Development)
 - [x] Enterprise Project Structure Setup
 - [x] User Registration Servlet (In-memory storage)
-- [ ] User Login Servlet & Session Management
-- [ ] WebSocket Endpoint for Real-time Notifications
-- [ ] JMS Configuration for Message Persistence
-- [ ] Role-based Access Control (Church Leaders vs Members)
+- [x] User Login Servlet & Session Management
+- [x] WebSocket Endpoint for Real-time Notifications
+- [x] JMS Configuration for Message Persistence
+- [x] Role-based Access Control (Church Leaders vs Members)
 
 ## Developer Setup
 1. Open the project in NetBeans 30.
