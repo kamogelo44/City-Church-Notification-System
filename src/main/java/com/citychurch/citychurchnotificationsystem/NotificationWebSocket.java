@@ -10,7 +10,6 @@ import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Set;
 
 
 /**
@@ -28,7 +27,7 @@ public class NotificationWebSocket {
     @OnMessage
     public void onMessage(String message, Session session) {
         System.out.println("Message received: " + message);
-        broadcastMessage(message, session);
+        broadcastMessage(message);
     }
 
     @OnClose
@@ -36,9 +35,8 @@ public class NotificationWebSocket {
         System.out.println("Connection closed: " + session.getId());
     }
 
-    private void broadcastMessage(String message, Session senderSession) {
-        Set<Session> openSessions = senderSession.getOpenSessions();
-        for (Session session : openSessions) {
+    public static void broadcastMessage(String message) {
+        for (Session session : WebSocketSessionHandler.getSessions()) {
             if (session.isOpen()) {
                 try {
                     session.getBasicRemote().sendText(message);
