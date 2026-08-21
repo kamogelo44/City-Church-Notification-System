@@ -25,7 +25,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "NotificationServlet", urlPatterns = {"/sendNotification"})
 public class NotificationServlet extends HttpServlet {
 
-    @Resource(mappedName = "jms/ChurchConnectionFactory")
+    @Resource(mappedName = "jms/__defaultConnectionFactory")
     private ConnectionFactory connectionFactory;
 
     @Resource(mappedName = "jms/ChurchNotificationQueue")
