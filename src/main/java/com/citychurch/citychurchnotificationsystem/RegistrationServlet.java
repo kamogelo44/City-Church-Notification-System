@@ -28,6 +28,7 @@ public class RegistrationServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String role = request.getParameter("role");
 
         // 1.2 Validate input data
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
@@ -41,8 +42,13 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
+        // Default to MEMBER if no role is provided
+        if (role == null || role.isEmpty()) {
+            role = "MEMBER";
+        }
+
         // 1.3 Store credentials in HashMap
-        User newUser = new User(username, password, "MEMBER");
+        User newUser = new User(username, password, role);
         UserStorage.addUser(username, newUser);
 
         // 1.5 Return success response

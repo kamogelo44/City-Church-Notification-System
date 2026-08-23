@@ -25,6 +25,10 @@
             <input type="password" name="password" required><br><br>
             <label>Confirm Password:</label><br>
             <input type="password" name="confirmPassword" required><br><br>
+            <select name="role">
+                <option value="MEMBER">Member</option>
+                <option value="LEADER">Church Leader</option>
+            </select>
             <button type="submit">Register</button>
         </form>
         <br>
