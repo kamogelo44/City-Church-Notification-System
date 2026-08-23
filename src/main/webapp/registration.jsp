@@ -10,28 +10,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>City Church Registration</title>
-        <style>
-            body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-            form { display: inline-block; text-align: left; }
-        </style>
+        <!-- External CSS -->
+        <link rel="stylesheet" href="resources/css/styles.css">
     </head>
     <body>
-        <h2>City Church Notification System</h2>
-        <h3>Registration</h3>
-        <form action="register" method="POST">
-            <label>Username:</label><br>
-            <input type="text" name="username" required><br><br>
-            <label>Password:</label><br>
-            <input type="password" name="password" required><br><br>
-            <label>Confirm Password:</label><br>
-            <input type="password" name="confirmPassword" required><br><br>
-            <select name="role">
-                <option value="MEMBER">Member</option>
-                <option value="LEADER">Church Leader</option>
-            </select>
-            <button type="submit">Register</button>
-        </form>
-        <br>
-        <p>Already have an account? <a href="login.jsp">Login here</a></p>
+        <div class="container">
+            <h2>City Church Notification System</h2>
+            <form action="register" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+                
+                <select name="role">
+                    <option value="MEMBER">Member</option>
+                    <option value="LEADER">Church Leader</option>
+                </select>
+                
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="login.jsp">Login here</a></p>
+        </div>
     </body>
 </html>

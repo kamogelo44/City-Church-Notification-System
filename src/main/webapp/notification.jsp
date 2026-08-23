@@ -11,6 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Church Leader Notifications</title>
+        <!-- External CSS -->
+        <link rel="stylesheet" href="resources/css/styles.css">
     </head>
     <body>
         <%
@@ -21,16 +23,17 @@
                 return;
             }
         %>
-        <h2>Church Leader Dashboard</h2>
-        <p>Welcome, Leader <strong><%= user.getUsername() %></strong>.</p>
-        <hr>
-        <h3>Create a Notification</h3>
-        <form action="sendNotification" method="POST">
-            <label>Message:</label><br>
-            <textarea name="notificationMessage" rows="4" cols="50" required></textarea><br><br>
-            <button type="submit">Send Notification</button>
-        </form>
-        <br>
-        <a href="home.jsp">Back to Home</a>
+        <div class="container dashboard">
+            <h2>Church Leader Dashboard</h2>
+            <p>Welcome, Leader <strong><%= user.getUsername() %></strong>.</p>
+            <hr>
+            <h3>Create a Notification</h3>
+            <form action="sendNotification" method="POST">
+                <textarea name="notificationMessage" rows="4" required placeholder="Write your message here..."></textarea>
+                <button type="submit">Send Notification</button>
+            </form>
+            <br>
+            <a href="home.jsp">Back to Home</a>
+        </div>
     </body>
 </html>

@@ -10,22 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>City Church Login</title>
-        <style>
-            body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-            form { display: inline-block; text-align: left; }
-        </style>
+        <!-- External CSS -->
+        <link rel="stylesheet" href="resources/css/styles.css">
     </head>
     <body>
-        <h2>City Church Notification System</h2>
-        <h3>Login</h3>
-        <form action="login" method="POST">
-            <label>Username:</label><br>
-            <input type="text" name="username" required><br><br>
-            <label>Password:</label><br>
-            <input type="password" name="password" required><br><br>
-            <button type="submit">Login</button>
-        </form>
-        <br>
-        <p>Don't have an account? <a href="registration.jsp">Register here</a></p>
+        <div class="container">
+            <h2>City Church Notification System</h2>
+            <form action="login" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="registration.jsp">Register here</a></p>
+        </div>
     </body>
 </html>
