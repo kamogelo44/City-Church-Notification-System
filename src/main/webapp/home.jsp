@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.citychurch.citychurchnotificationsystem.User" %>
-<%@page import="com.citychurch.citychurchnotificationsystem.NotificationStorage" %>
 <%
     // Authentication security check
     User user = (User) session.getAttribute("user");
@@ -19,27 +18,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>City Church Home</title>
+        <title>Church Dashboard</title>
         <link rel="stylesheet" href="resources/css/styles.css">
         <script src="resources/js/websocket-client.js"></script>
     </head>
     <body>
         <div class="container dashboard">
             <h2>Welcome, <%= user.getUsername() %></h2>
-            <p>You are logged in.</p>
+            <p>You are successfully logged into the City Church system.</p>
             <hr>
-            
-            <h3>Notifications</h3>
-            <div id="notifications">
-                <%-- Render message history on page load --%>
-                <% for (String msg : NotificationStorage.getHistory()) { %>
-                    <p><%= msg %></p>
-                <% } %>
-            </div>
-            
-            <hr>
-            <a href="notification.jsp">View Church Leader Notifications</a>
+            <p><a href="notification.jsp">Open Notification Center</a></p>
         </div>
     </body>
 </html>
-
