@@ -6,33 +6,43 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.citychurch.citychurchnotificationsystem.User" %>
+<%
+    // Check if user is logged in AND is a Leader
+    User user = (User) session.getAttribute("user");
+    if (user == null || !"LEADER".equalsIgnoreCase(user.getRole())) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Church Leader Notifications</title>
-        <!-- External CSS -->
         <link rel="stylesheet" href="resources/css/styles.css">
+        <script src="resources/js/websocket-client.js"></script>
     </head>
     <body>
-        <%
-            // Role-Based Access Control (Referenced from OWASP)
-            User user = (User) session.getAttribute("user");
-            if (user == null || !"LEADER".equalsIgnoreCase(user.getRole())) {
-                response.sendRedirect("login.jsp");
-                return;
-            }
-        %>
         <div class="container dashboard">
             <h2>Church Leader Dashboard</h2>
             <p>Welcome, Leader <strong><%= user.getUsername() %></strong>.</p>
             <hr>
+            
             <h3>Create a Notification</h3>
             <form action="sendNotification" method="POST">
                 <textarea name="notificationMessage" rows="4" required placeholder="Write your message here..."></textarea>
                 <button type="submit">Send Notification</button>
             </form>
-            <br>
+            
+            <hr>
+            
+            <!-- Unified Notifications Section -->
+            <h3>Notifications</h3>
+            <div id="notification-area">
+                <!-- New notifications will appear here instantly -->
+            </div>
+            
+            <hr>
             <a href="home.jsp">Back to Home</a>
         </div>
     </body>
