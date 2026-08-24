@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.citychurch.citychurchnotificationsystem;
 
 import jakarta.annotation.Resource;
 import jakarta.inject.Inject;
-import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
 import jakarta.jms.Queue;
 import jakarta.servlet.ServletException;
@@ -25,9 +20,6 @@ import java.io.PrintWriter;
 @WebServlet(name = "NotificationServlet", urlPatterns = {"/sendNotification"})
 public class NotificationServlet extends HttpServlet {
 
-    @Resource(mappedName = "jms/__defaultConnectionFactory")
-    private ConnectionFactory connectionFactory;
-
     @Resource(mappedName = "jms/ChurchNotificationQueue")
     private Queue queue;
 
@@ -41,7 +33,7 @@ public class NotificationServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        // 10.1 Role-Based Access Control
+        // Session authorization check
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("login.jsp");
@@ -60,10 +52,13 @@ public class NotificationServlet extends HttpServlet {
             return;
         }
 
-        // Send message to JMS Queue
-        jmsContext.createProducer().send(queue, message);
-        
-        out.println("<h3>Notification sent successfully!</h3>");
-        out.println("<a href='home.jsp'>Back to Home</a>");
+        try {
+            jmsContext.createProducer().send(queue, message);
+            
+            out.println("<h3>Notification sent successfully!</h3>");
+            out.println("<a href='home.jsp'>Back to Home</a>");
+        } catch (Exception e) {
+            e.printStackTrace(out);
+        }
     }
 }

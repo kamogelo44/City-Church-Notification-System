@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.citychurch.citychurchnotificationsystem.User" %>
 <%
-    // Check if user is logged in AND is a Leader
+    // Role-based access control check
     User user = (User) session.getAttribute("user");
     if (user == null || !"LEADER".equalsIgnoreCase(user.getRole())) {
         response.sendRedirect("login.jsp");
@@ -29,18 +29,15 @@
             <hr>
             
             <h3>Create a Notification</h3>
-            <form action="sendNotification" method="POST">
-                <textarea name="notificationMessage" rows="4" required placeholder="Write your message here..."></textarea>
+            <form id="notificationForm" method="POST">
+                <textarea id="notificationMessage" name="notificationMessage" rows="4" required placeholder="Write your message here..."></textarea>
                 <button type="submit">Send Notification</button>
             </form>
             
             <hr>
             
-            <!-- Unified Notifications Section -->
             <h3>Notifications</h3>
-            <div id="notification-area">
-                <!-- New notifications will appear here instantly -->
-            </div>
+            <div id="notifications"></div>
             
             <hr>
             <a href="home.jsp">Back to Home</a>

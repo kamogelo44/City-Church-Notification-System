@@ -10,7 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>City Church Registration</title>
-        <!-- External CSS -->
         <link rel="stylesheet" href="resources/css/styles.css">
     </head>
     <body>

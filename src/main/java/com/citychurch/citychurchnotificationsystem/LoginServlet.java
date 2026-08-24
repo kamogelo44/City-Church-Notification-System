@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        // 2.2 Validate input data
+        // Input validation
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             out.println("<h3>Error: Username and Password are required.</h3>");
             return;
@@ -38,16 +38,14 @@ public class LoginServlet extends HttpServlet {
 
         User user = UserStorage.getUser(username);
 
-        // Check credentials
+        // Verify credentials
         if (user != null && user.getPassword().equals(password)) {
-            // 2.3 Create HTTP Session on success
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             
             out.println("<h3>Login Successful!</h3>");
             out.println("<a href='home.jsp'>Go to Home</a>");
         } else {
-            // 2.4 Return appropriate error response
             out.println("<h3>Error: Invalid username or password.</h3>");
         }
     }

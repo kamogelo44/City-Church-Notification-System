@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package com.citychurch.citychurchnotificationsystem;
 
 import jakarta.websocket.OnClose;
@@ -21,7 +20,6 @@ public class NotificationWebSocket {
 
     @OnOpen
     public void onOpen(Session session) {
-        // Store the active session so we can broadcast to it later
         WebSocketSessionHandler.addSession(session);
         System.out.println("Connection opened: " + session.getId());
     }
@@ -34,7 +32,6 @@ public class NotificationWebSocket {
 
     @OnClose
     public void onClose(Session session) {
-        // Remove the session when it disconnects
         WebSocketSessionHandler.removeSession(session);
         System.out.println("Connection closed: " + session.getId());
     }

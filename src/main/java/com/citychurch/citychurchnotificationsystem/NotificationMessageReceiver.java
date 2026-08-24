@@ -9,6 +9,7 @@ import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.MessageListener;
 import jakarta.jms.TextMessage;
+
 /**
  *
  * @author Obakeng Phale
@@ -24,7 +25,6 @@ public class NotificationMessageReceiver implements MessageListener {
                 String text = textMessage.getText();
                 System.out.println("Received notification from JMS: " + text);
                 
-                // Call the public static method to broadcast via WebSocket
                 NotificationWebSocket.broadcastMessage(text);
 
             } catch (JMSException e) {

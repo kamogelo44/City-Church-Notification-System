@@ -8,21 +8,53 @@
  * When a leader sends a message, this script catches it and shows it on the page.
  */
 
-var socket = new WebSocket("ws://asusvivibook:8080/CityChurchNotificationSystem/notifications");
+window.addEventListener('DOMContentLoaded', (event) => {
+    
+    const socket = new WebSocket("ws://asusvivibook:8080/CityChurchNotificationSystem/notifications");
 
-// When we get a message from the server, add it to the notifications list
-socket.onmessage = function(event) {
-    var messageDiv = document.getElementById("notifications");
-    var newMessage = document.createElement("p");
-    newMessage.textContent = event.data;
-    messageDiv.appendChild(newMessage);
-};
+    socket.onmessage = function(event) {
+        const messageDiv = document.getElementById("notifications");
+        if (messageDiv) {
+            const newMessage = document.createElement("p");
+            newMessage.textContent = event.data;
+            messageDiv.appendChild(newMessage);
+        }
+    };
 
-// Just checking if the connection is working
-socket.onopen = function(event) {
-    console.log("WebSocket connected");
-};
+    socket.onopen = function(event) {
+        console.log("Connected to WebSocket");
+    };
 
-socket.onclose = function(event) {
-    console.log("WebSocket disconnected");
-};
+    socket.onclose = function(event) {
+        console.log("Disconnected from WebSocket");
+    };
+
+    // AJAX form submission to prevent page reload and WebSocket disconnection
+    const notificationForm = document.getElementById('notificationForm');
+    if (notificationForm) {
+        notificationForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            const textArea = document.getElementById('notificationMessage');
+            const messageValue = textArea.value;
+
+            fetch('sendNotification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'notificationMessage=' + encodeURIComponent(messageValue)
+            })
+            .then(response => {
+                if (response.ok) {
+                    textArea.value = ''; 
+                }
+            })
+            .catch(error => {
+                console.error("Error sending message:", error);
+            });
+        });
+    }
+});
+
+

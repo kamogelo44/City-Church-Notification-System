@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.citychurch.citychurchnotificationsystem.User" %>
 <%
-    // Check if user is logged in before anything else
+    // Authentication security check
     User user = (User) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp");
@@ -19,9 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>City Church Home</title>
-        <!-- External CSS -->
         <link rel="stylesheet" href="resources/css/styles.css">
-        <!-- External JS -->
         <script src="resources/js/websocket-client.js"></script>
     </head>
     <body>
@@ -30,11 +28,8 @@
             <p>You are logged in.</p>
             <hr>
             
-            <!-- Unified Notifications Section -->
             <h3>Notifications</h3>
-            <div id="notification-area">
-                <!-- New notifications will appear here instantly -->
-            </div>
+            <div id="notifications"></div>
             
             <hr>
             <a href="notification.jsp">View Church Leader Notifications</a>

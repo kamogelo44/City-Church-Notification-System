@@ -30,28 +30,26 @@ public class RegistrationServlet extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
-        // 1.2 Validate input data
+        // Input validation
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             out.println("<h3>Error: All fields are required.</h3>");
             return;
         }
 
-        // 1.4 Prevent registration if username already exists
+        // Check for existing user
         if (UserStorage.userExists(username)) {
             out.println("<h3>Error: Username already exists.</h3>");
             return;
         }
 
-        // Default to MEMBER if no role is provided
         if (role == null || role.isEmpty()) {
             role = "MEMBER";
         }
 
-        // 1.3 Store credentials in HashMap
+        // Save new user data
         User newUser = new User(username, password, role);
         UserStorage.addUser(username, newUser);
 
-        // 1.5 Return success response
         out.println("<h3>Registration Successful!</h3>");
         out.println("<a href='login.jsp'>Go to Login</a>");
     }
