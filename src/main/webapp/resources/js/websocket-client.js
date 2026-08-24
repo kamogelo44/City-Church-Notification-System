@@ -37,6 +37,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             
             const textArea = document.getElementById('notificationMessage');
             const messageValue = textArea.value;
+            const statusLabel = document.getElementById('formStatus');
 
             fetch('sendNotification', {
                 method: 'POST',
@@ -48,10 +49,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
             .then(response => {
                 if (response.ok) {
                     textArea.value = ''; 
+                    // Show a quick success confirmation to the leader
+                    if (statusLabel) {
+                        statusLabel.textContent = "Notification broadcasted successfully!";
+                        statusLabel.style.color = "green";
+                    }
+                } else {
+                    if (statusLabel) {
+                        statusLabel.textContent = "Server failed to send notification.";
+                        statusLabel.style.color = "red";
+                    }
                 }
             })
             .catch(error => {
                 console.error("Error sending message:", error);
+                if (statusLabel) {
+                    statusLabel.textContent = "Network error occurred.";
+                    statusLabel.style.color = "red";
+                }
             });
         });
     }

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.citychurch.citychurchnotificationsystem.User" %>
+<%@page import="com.citychurch.citychurchnotificationsystem.NotificationStorage" %>
 <%
     // Authentication security check
     User user = (User) session.getAttribute("user");
@@ -29,10 +30,16 @@
             <hr>
             
             <h3>Notifications</h3>
-            <div id="notifications"></div>
+            <div id="notifications">
+                <%-- Render message history on page load --%>
+                <% for (String msg : NotificationStorage.getHistory()) { %>
+                    <p><%= msg %></p>
+                <% } %>
+            </div>
             
             <hr>
             <a href="notification.jsp">View Church Leader Notifications</a>
         </div>
     </body>
 </html>
+

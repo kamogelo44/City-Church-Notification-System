@@ -14,6 +14,7 @@ import jakarta.jms.TextMessage;
  *
  * @author Obakeng Phale
  */
+
 @MessageDriven(mappedName = "jms/ChurchNotificationQueue")
 public class NotificationMessageReceiver implements MessageListener {
 
@@ -25,6 +26,8 @@ public class NotificationMessageReceiver implements MessageListener {
                 String text = textMessage.getText();
                 System.out.println("Received notification from JMS: " + text);
                 
+                NotificationStorage.addMessage(text);
+                
                 NotificationWebSocket.broadcastMessage(text);
 
             } catch (JMSException e) {
@@ -33,3 +36,4 @@ public class NotificationMessageReceiver implements MessageListener {
         }
     }
 }
+

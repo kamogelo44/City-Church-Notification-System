@@ -34,10 +34,8 @@
                 <button type="submit">Send Notification</button>
             </form>
             
-            <hr>
-            
-            <h3>Notifications</h3>
-            <div id="notifications"></div>
+            <!-- Dynamic feedback loop label for the user -->
+            <p id="formStatus" style="color: green; font-weight: bold;"></p>
             
             <hr>
             <a href="home.jsp">Back to Home</a>

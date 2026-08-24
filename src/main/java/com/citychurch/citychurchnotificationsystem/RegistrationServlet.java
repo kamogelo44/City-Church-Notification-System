@@ -38,7 +38,8 @@ public class RegistrationServlet extends HttpServlet {
 
         // Check for existing user
         if (UserStorage.userExists(username)) {
-            out.println("<h3>Error: Username already exists.</h3>");
+            request.setAttribute("message", "Username already exists.");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
             return;
         }
 
@@ -50,7 +51,8 @@ public class RegistrationServlet extends HttpServlet {
         User newUser = new User(username, password, role);
         UserStorage.addUser(username, newUser);
 
-        out.println("<h3>Registration Successful!</h3>");
-        out.println("<a href='login.jsp'>Go to Login</a>");
+        // Redirect to styled success page
+        request.setAttribute("message", "Registration Successful!");
+        request.getRequestDispatcher("success.jsp").forward(request, response);
     }
 }

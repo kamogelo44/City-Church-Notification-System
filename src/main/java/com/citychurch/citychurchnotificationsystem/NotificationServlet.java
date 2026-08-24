@@ -42,7 +42,8 @@ public class NotificationServlet extends HttpServlet {
 
         User user = (User) session.getAttribute("user");
         if (!"LEADER".equalsIgnoreCase(user.getRole())) {
-            out.println("<h3>Error: Access denied. Only Church Leaders can send notifications.</h3>");
+            request.setAttribute("message", "Access denied. Only Church Leaders can send notifications.");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
             return;
         }
 
@@ -55,8 +56,8 @@ public class NotificationServlet extends HttpServlet {
         try {
             jmsContext.createProducer().send(queue, message);
             
-            out.println("<h3>Notification sent successfully!</h3>");
-            out.println("<a href='home.jsp'>Back to Home</a>");
+            request.setAttribute("message", "Notification broadcasted successfully!");
+            request.getRequestDispatcher("success.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace(out);
         }
